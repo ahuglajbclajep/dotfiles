@@ -1,0 +1,14 @@
+{
+  "workbench.startupEditor": "newUntitledFile",
+  "editor.renderWhitespace": "all",
+  "editor.wordWrap": "on",
+  "editor.rulers": [80, 120],
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "editor.formatOnSave": true,
+  "[dockerfile]": {
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2
+  }
+}
