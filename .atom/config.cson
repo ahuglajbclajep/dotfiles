@@ -1,0 +1,13 @@
+"*":
+  core:
+    disabledPackages: [
+      "spell-check"
+    ]
+    telemetryConsent: "no"
+  editor:
+    showIndentGuide: true
+    showInvisibles: true
+  "line-ending-selector":
+    defaultLineEnding: "LF"
+  welcome:
+    showOnStartup: false
