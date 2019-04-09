@@ -117,7 +117,7 @@ if ! shopt -oq posix; then
 fi
 
 
-# My settings
+# my settings
 ## nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -135,3 +135,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 ## others
 export PATH="$PYENV_ROOT/bin:$PATH"
+
+## aliases
+alias code='visual-studio-code'

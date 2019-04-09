@@ -27,7 +27,7 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 
-# My settings
+# my settings
 ## umake
 export UMAKE_ROOT="$HOME/.local/share/umake"
 

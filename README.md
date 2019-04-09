@@ -1,5 +1,5 @@
 # dotfiles
 
 ```sh
-git clone git@github.com:ahuglajbclajep/dotfiles.git ~/.dotfiles && chmod +x ~/.dotfiles/install.sh && ~/.dotfiles/install.sh
+git clone https://github.com/ahuglajbclajep/dotfiles.git ~/.dotfiles && ~/.dotfiles/install.sh
 ```
