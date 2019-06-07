@@ -137,4 +137,3 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export PATH="$PYENV_ROOT/bin:$PATH"
 
 ## aliases
-alias code='visual-studio-code'
