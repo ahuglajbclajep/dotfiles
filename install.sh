@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 cd "$(dirname "$0")"
-files=$(find . -type f ! -path '*/.git/*' ! -name 'README.md' ! -name 'install.sh')
+files=$(find . -type f ! -path '*/.git/*' ! -path '*/other/*' ! -name 'install.sh' ! -name 'README.md')
 IFS='
 '
 for file in $files; do
