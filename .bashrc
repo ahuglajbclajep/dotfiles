@@ -135,5 +135,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 ## others
 export PATH="$PYENV_ROOT/bin:$PATH"
+export LS_COLORS='ow=01;33'
 
 ## aliases
