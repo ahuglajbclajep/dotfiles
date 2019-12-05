@@ -5,6 +5,7 @@
 [core]
 	quotePath = false
 	autocrlf = input
+	editor = code -w
 	excludesfile = ~/.gitignore_global
 
 [push]

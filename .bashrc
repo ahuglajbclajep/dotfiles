@@ -119,9 +119,8 @@ fi
 
 # my settings
 ## nvm
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 ## pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -135,6 +134,20 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 ## others
 export PATH="$PYENV_ROOT/bin:$PATH"
-export LS_COLORS='ow=01;33'
 
 ## aliases
+
+# WSL
+if uname -r | grep -q 'Microsoft'; then
+  export LS_COLORS='ow=01;33'
+
+  open() {
+    if [ $# -ne 1 ]; then return 1; fi
+    if [ -e "$1" ]; then
+      local path=$(readlink -f "$1" | xargs -0 wslpath -w)
+      powershell.exe start "\"${path%?}\""
+    else
+      powershell.exe start "$1"
+    fi
+  }
+fi
