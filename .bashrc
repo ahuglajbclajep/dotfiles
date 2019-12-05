@@ -121,6 +121,7 @@ fi
 ## nvm
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 ## pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -135,7 +136,11 @@ export SDKMAN_DIR="$HOME/.sdkman"
 ## others
 export PATH="$PYENV_ROOT/bin:$PATH"
 
-## aliases
+ggl() {
+  if [ $# -eq 0 ]; then return 1; fi
+  echo "$@" | sed 's/ /+/g' | xargs -I{} bash -c 'open "https://www.google.com/search?q={}"'
+}
+
 
 # WSL
 if uname -r | grep -q 'Microsoft'; then
@@ -150,4 +155,5 @@ if uname -r | grep -q 'Microsoft'; then
       powershell.exe start "$1"
     fi
   }
+  export -f open
 fi
