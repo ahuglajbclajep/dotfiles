@@ -25,7 +25,8 @@
       "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
       "name": "Ubuntu-18.04",
       "commandline": "wsl.exe -d Ubuntu-18.04",
-      "startingDirectory": "\\\\wsl$\\Ubuntu-18.04\\home\\ahu",
+      // see https://github.com/microsoft/terminal/issues/1060
+      "startingDirectory": ".",
       "background": "#0c0c0c",
       "cursorColor": "#f2f2f2",
       "useAcrylic": true,

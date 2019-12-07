@@ -118,29 +118,26 @@ fi
 
 
 # my settings
-## nvm
+# nvm
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-## pyenv
+# pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
 
-## sdkman
+# sdkman
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
-## others
+# others
 export PATH="$PYENV_ROOT/bin:$PATH"
 
 ggl() {
   if [ $# -eq 0 ]; then return 1; fi
   echo "$@" | sed 's/ /+/g' | xargs -I{} bash -c 'open "https://www.google.com/search?q={}"'
 }
-
 
 # WSL
 if uname -r | grep -q 'Microsoft'; then
@@ -156,4 +153,7 @@ if uname -r | grep -q 'Microsoft'; then
     fi
   }
   export -f open
+
+  # see https://github.com/microsoft/terminal/issues/1060
+  if [ "$PWD" = '/mnt/c/WINDOWS/system32' ]; then cd; fi
 fi
