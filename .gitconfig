@@ -11,6 +11,9 @@
 [push]
 	default = current
 
+[rebase]
+	autostash = true
+
 [alias]
 	# util
 	root-dir = rev-parse --show-toplevel
@@ -21,6 +24,9 @@
 
 	# my `git log --graph --decorate --oneline`
 	stree = log --graph --pretty=format:'%x09%C(yellow)%h%Creset%C(cyan)%d%Creset %C(magenta)<%an>%Creset %Cgreen[%ci]%Creset %s'
+
+	# show differences character by character
+	diff-char = diff --color-words='.'
 
 	# amend a commit without changing its commit message
 	amend = commit --amend -a --no-edit
