@@ -3,10 +3,14 @@
 	email = ahuglajbclajep@gmail.com
 
 [core]
+	ignorecase = false
 	quotePath = false
 	autocrlf = input
-	editor = code -w
 	excludesfile = ~/.gitignore_global
+	editor = code -w
+
+[credential]
+	helper = cache
 
 [push]
 	default = current
