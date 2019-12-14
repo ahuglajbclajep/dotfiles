@@ -11,7 +11,7 @@
       "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}", // PowerShell
       "background": "#0c0c0c",
       "cursorColor": "#f2f2f2",
-      "fontSize": 10,
+      "fontSize": 11,
       "useAcrylic": true,
       "acrylicOpacity": 0
     },
@@ -19,6 +19,8 @@
       "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}", // cmd
       "background": "#0c0c0c",
       "cursorColor": "#f2f2f2",
+      "fontSize": 11,
+      "useAcrylic": true,
       "acrylicOpacity": 0
     },
     {

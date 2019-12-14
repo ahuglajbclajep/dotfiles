@@ -155,5 +155,5 @@ if uname -r | grep -q 'Microsoft'; then
   export -f open
 
   # see https://github.com/microsoft/terminal/issues/1060
-  if [ "$PWD" = '/mnt/c/WINDOWS/system32' ]; then cd; fi
+  if [ "${PWD,,}" = '/mnt/c/windows/system32' ]; then cd; fi
 fi
