@@ -141,8 +141,10 @@ ggl() {
 
 # WSL
 if uname -r | grep -q 'Microsoft'; then
+  # see https://www.kwbtblog.com/entry/2019/04/27/023411
   export LS_COLORS='ow=01;33'
 
+  # see https://qiita.com/ahuglajbclajep/items/7e72acd689c7b302795a
   open() {
     if [ $# -ne 1 ]; then return 1; fi
     if [ -e "$1" ]; then
