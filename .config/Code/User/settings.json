@@ -8,18 +8,12 @@
   "files.trimFinalNewlines": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
+    "source.fixAll": true,
     "source.organizeImports": true
   },
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe",
   "[dockerfile]": {
     "editor.detectIndentation": false,
     "editor.tabSize": 2
   },
-  "eslint.autoFixOnSave": true,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    { "language": "typescript", "autoFix": true },
-    { "language": "typescriptreact", "autoFix": true }
-  ]
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe"
 }
