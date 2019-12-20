@@ -2,7 +2,8 @@
 
 cd "$(dirname "$0")"
 files=$(find . -type f ! -path '*/.git/*' ! -path '*/other/*' ! -name 'install.sh' ! -name 'README.md')
-IFS=
+IFS='
+'
 for file in $files; do
   target=~/${file#./}
   mkdir -p "${target%/*}"
