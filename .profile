@@ -28,8 +28,8 @@ fi
 
 
 # my settings
-## umake
+# umake
 export UMAKE_ROOT="$HOME/.local/share/umake"
 
-## others
+# others
 PATH="$UMAKE_ROOT/bin:$PATH"

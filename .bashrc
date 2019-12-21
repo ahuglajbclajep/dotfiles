@@ -132,7 +132,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 # others
-export PATH="$PYENV_ROOT/bin:$PATH"
+PATH="$PYENV_ROOT/bin:$PATH"
 alias open='xdg-open'
 
 # WSL
