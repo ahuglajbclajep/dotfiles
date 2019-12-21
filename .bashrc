@@ -133,11 +133,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # others
 export PATH="$PYENV_ROOT/bin:$PATH"
-
-ggl() {
-  if [ $# -eq 0 ]; then return 1; fi
-  echo "$@" | sed 's/ /+/g' | xargs -I{} bash -c 'open "https://www.google.com/search?q={}"'
-}
+alias open='xdg-open'
 
 # WSL
 if uname -r | grep -q 'Microsoft'; then
@@ -145,7 +141,7 @@ if uname -r | grep -q 'Microsoft'; then
   export LS_COLORS='ow=01;33'
 
   # see https://qiita.com/ahuglajbclajep/items/7e72acd689c7b302795a
-  open() {
+  wsl-open() {
     if [ $# -ne 1 ]; then return 1; fi
     if [ -e "$1" ]; then
       local path=$(readlink -f "$1" | xargs -0 wslpath -w)
@@ -154,8 +150,13 @@ if uname -r | grep -q 'Microsoft'; then
       powershell.exe start "$1"
     fi
   }
-  export -f open
+  alias open='wsl-open'
 
   # see https://github.com/microsoft/terminal/issues/1060
   if [ "${PWD,,}" = '/mnt/c/windows/system32' ]; then cd; fi
 fi
+
+ggl() {
+  if [ $# -eq 0 ]; then return 1; fi
+  open "https://www.google.com/search?q=$(echo "$@" | sed 's/+/%2B/g;s/ /+/g')"
+}
