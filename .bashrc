@@ -134,6 +134,11 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # others
 PATH="$PYENV_ROOT/bin:$PATH"
 alias open='xdg-open'
+# for umake
+if type visual-studio-code > /dev/null 2>&1; then
+  code() { visual-studio-code "$@"; }
+  export -f code
+fi
 
 # WSL
 if uname -r | grep -q 'Microsoft'; then
