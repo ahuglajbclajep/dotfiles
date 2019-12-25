@@ -22,6 +22,11 @@ if ($isadmin) {
 else { }
 
 # for vscode
-if (Get-Command 'code' -ea SilentlyContinue) { }
+$yn = Read-Host 'install VS Code extensions? (y/N)'
+if (($yn -eq 'y') -and (Get-Command 'code' -ea SilentlyContinue)) {
+    foreach ($e in Get-Content 'other\vscode-extensions.txt') {
+        code --install-extension "$e"
+    }
+}
 
 Pop-Location
