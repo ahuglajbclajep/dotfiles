@@ -1,5 +1,3 @@
-# powershell -executionpolicy remotesigned .\install.ps1
-
 $ErrorActionPreference = "Stop"
 trap { Pop-Location }
 Push-Location "$PSScriptRoot"
@@ -8,7 +6,7 @@ Push-Location "$PSScriptRoot"
 $isadmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(
     [Security.Principal.WindowsBuiltInRole] "Administrator")
 
-$wtdir = Get-ChildItem "$env:LOCALAPPDATA/Packages" | Where-Object Name -match 'WindowsTerminal' |`
+$wtdir = Get-ChildItem "$env:LOCALAPPDATA/Packages" | Where-Object Name -match 'WindowsTerminal' |
     Select-Object -ExpandProperty 'FullName'
 
 $mappings = @(
@@ -16,14 +14,16 @@ $mappings = @(
     @{ 'from' = 'other\profiles.json'; 'to' = "$wtdir\LocalState\profiles.json" }
 )
 
-if ($isadmin) {
-    foreach ($m in $mappings) {
-        New-Item -ItemType Directory -Path (Split-Path -Parent $m.to) -Force > $null
-        New-Item -ItemType SymbolicLink -Path $m.to -Value $m.from -Force -cf > $null
+$yn = Read-Host 'create symbolic links? (y/N)'
+if ($yn -eq 'y') {
+    if (!$isadmin) {
+        Write-Host 'creating a symbolic link on Windows requires elevation as administrator.' -ForegroundColor Red
+    } else {
+        foreach ($m in $mappings) {
+            New-Item -ItemType Directory -Path (Split-Path -Parent $m.to) -Force > $null
+            New-Item -ItemType SymbolicLink -Path $m.to -Value $m.from -Force -cf:(Test-Path $m.to) > $null
+        }
     }
-}
-else {
-    Write-Host 'creating a symbolic link on Windows requires elevation as administrator.' -ForegroundColor Red
 }
 
 $yn = Read-Host 'install VS Code extensions? (y/N)'
