@@ -4,12 +4,12 @@ cd "$(dirname "$0")"
 
 read -rp 'create symbolic links? (y/N): ' yn
 if [ "$yn" = 'y' ]; then
-  files=$(find . -type f ! -path '*/.git/*' ! -path '*/other/*' ! -name 'install.sh' ! -name 'README.md')
+  files=$(find ../ -type f ! -path '*/.git/*' ! -path '*/other/*' ! -path '*/scripts/*' ! -name 'README.md')
   IFS=$'\n'
   for file in $files; do
-    target=~/${file#./}
+    target=~/${file#../}
     mkdir -p "${target%/*}"
-    ln -is "$PWD/${file#./}" "$target"
+    ln -is "${PWD%/*}/${file#../}" "$target"
   done
   . ~/.profile
 fi
@@ -18,5 +18,5 @@ read -rp 'install VS Code extensions? (y/N): ' yn
 if [ "$yn" = 'y' ] && type code > /dev/null 2>&1; then
   while read -r line; do
     code --install-extension "$line"
-  done < 'other/vscode-extensions.txt'
+  done < '../other/vscode-extensions.txt'
 fi
