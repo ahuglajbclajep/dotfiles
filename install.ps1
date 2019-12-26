@@ -8,9 +8,12 @@ Push-Location "$PSScriptRoot"
 $isadmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(
     [Security.Principal.WindowsBuiltInRole] "Administrator")
 
+$wtdir = Get-ChildItem "$env:LOCALAPPDATA/Packages" | Where-Object Name -match 'WindowsTerminal' |`
+    Select-Object -ExpandProperty 'FullName'
+
 $mappings = @(
     @{ 'from' = '.config\Code\User\settings.json'; 'to' = "$env:APPDATA\Code\User\settings.json" },
-    @{ 'from' = 'other\profiles.json'; 'to' = '' }
+    @{ 'from' = 'other\profiles.json'; 'to' = "$wtdir\LocalState\profiles.json" }
 )
 
 if ($isadmin) {
@@ -19,9 +22,10 @@ if ($isadmin) {
         New-Item -ItemType SymbolicLink -Path $m.to -Value $m.from -Force -cf > $null
     }
 }
-else { }
+else {
+    Write-Host 'creating a symbolic link on Windows requires elevation as administrator.' -ForegroundColor Red
+}
 
-# for vscode
 $yn = Read-Host 'install VS Code extensions? (y/N)'
 if (($yn -eq 'y') -and (Get-Command 'code' -ea SilentlyContinue)) {
     foreach ($e in Get-Content 'other\vscode-extensions.txt') {
