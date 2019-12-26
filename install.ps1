@@ -1,6 +1,6 @@
 $ErrorActionPreference = "Stop"
 trap { Pop-Location }
-Push-Location "$PSScriptRoot"
+Push-Location $PSScriptRoot
 
 # see https://devblogs.microsoft.com/scripting/check-for-admin-credentials-in-a-powershell-script/
 $isadmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(
@@ -24,6 +24,21 @@ if ($yn -eq 'y') {
             New-Item -ItemType SymbolicLink -Path $m.to -Value $m.from -Force -cf:(Test-Path $m.to) > $null
         }
     }
+}
+
+$yn = Read-Host 'install wslgit? (y/N)'
+if ($yn -eq 'y') {
+    $bin = "$env:USERPROFILE\app\bin"
+
+    # see https://stackoverflow.com/questions/714877/setting-windows-powershell-environment-variables
+    $path = [Environment]::GetEnvironmentVariable('Path', [EnvironmentVariableTarget]::User) -split ';'
+    if ($path -notcontains $bin) {
+        [Environment]::SetEnvironmentVariable('Path', $path + $bin, [EnvironmentVariableTarget]::User)
+    }
+
+    New-Item -ItemType Directory -Path $bin -Force > $null
+    Invoke-WebRequest 'https://github.com/andy-5/wslgit/releases/latest/download/wslgit.exe' -OutFile "$bin\git.exe"
+    Write-Host (git --version)
 }
 
 $yn = Read-Host 'install VS Code extensions? (y/N)'
