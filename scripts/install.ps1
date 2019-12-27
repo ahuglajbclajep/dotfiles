@@ -26,12 +26,14 @@ if ($yn -eq 'y') {
 
 $yn = Read-Host 'install wslgit? (y/N)'
 if ($yn -eq 'y') {
-    $bin = "$env:USERPROFILE\app\bin"
+    $bin = "$HOME\app\bin"
 
     # see https://stackoverflow.com/questions/714877/setting-windows-powershell-environment-variables
-    $path = [Environment]::GetEnvironmentVariable('Path', [EnvironmentVariableTarget]::User) -split ';'
-    if ($path -notcontains $bin) {
-        [Environment]::SetEnvironmentVariable('Path', $path + $bin, [EnvironmentVariableTarget]::User)
+    $path = [Environment]::GetEnvironmentVariable('Path', [EnvironmentVariableTarget]::User) -replace ';$', ''
+    if (($path -split ';') -notcontains $bin) {
+        [Environment]::SetEnvironmentVariable('Path', "$path;$bin;", [EnvironmentVariableTarget]::User)
+        # see https://stackoverflow.com/questions/17794507/reload-the-path-in-powershell
+        $env:Path = [Environment]::GetEnvironmentVariable('Path', [EnvironmentVariableTarget]::User)
     }
 
     New-Item -ItemType Directory -Path $bin -Force > $null
