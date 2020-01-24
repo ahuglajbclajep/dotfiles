@@ -22,18 +22,23 @@
 	# util
 	root-dir = rev-parse --show-toplevel
 	current-branch = rev-parse --abbrev-ref @
+	current-remote-branch = rev-parse --abbrev-ref @{u}
+
+	# aliases
+	cm = commit -am
+	r1 = reset @^
 
 	# my `git log --graph --decorate`
-	tree = log --graph --pretty=format:'%x09%C(yellow)%h%Creset %C(magenta)<%an>%Creset%C(cyan)%d%Creset%n%x09%x09%Cgreen[%ci, %cr]%Creset %s'
+	tree-v = log --graph --pretty=format:'%x09%C(yellow)%h%Creset %C(magenta)<%an>%Creset%C(cyan)%d%Creset%n%x09%x09%Cgreen[%ci, %cr]%Creset %s'
 
 	# my `git log --graph --decorate --oneline`
-	stree = log --graph --pretty=format:'%x09%C(yellow)%h%Creset%C(cyan)%d%Creset %C(magenta)<%an>%Creset %Cgreen[%ci]%Creset %s'
+	tree = log --graph --pretty=format:'%x09%C(yellow)%h%Creset%C(cyan)%d%Creset %C(magenta)<%an>%Creset %Cgreen[%ci]%Creset %s'
 
 	# show differences character by character
 	diff-char = diff --color-words='.'
 
 	# amend a commit without changing its commit message
-	amend = commit --amend -a --no-edit
+	amend = commit --amend --no-edit
 
 	# create an orphan branch
 	orphan = "!f() { git checkout --orphan $1 && git rm -r --cached $(git root-dir); }; f"
@@ -41,3 +46,6 @@
 
 	# move the latest commit to a new branch
 	move1 = "!f() { local old=$(git current-branch); git branch -m $1 && git branch $old @^; }; f"
+
+	# resets the index and working tree to remote state
+	pull-f = "!f() { git fetch -v && git reset --hard $(git current-remote-branch); }; f"
