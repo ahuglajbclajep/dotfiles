@@ -1,19 +1,29 @@
 {
+  /* editor */
   "workbench.startupEditor": "newUntitledFile",
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe",
+  "files.defaultLanguage": "markdown",
+
+  /* render */
   "editor.renderWhitespace": "all",
+  "editor.semanticHighlighting.enabled": true,
   "editor.wordWrap": "on",
   "editor.rulers": [80, 120],
+
+  /* format */
+  "editor.formatOnSave": true,
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
-  "editor.formatOnSave": true,
+  // see https://code.visualstudio.com/updates/v1_31#_fix-all-source-actions
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.organizeImports": true
   },
+
+  /* language specific */
   "[dockerfile]": {
     "editor.detectIndentation": false,
     "editor.tabSize": 2
-  },
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe"
+  }
 }

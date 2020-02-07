@@ -26,6 +26,7 @@
 
 	# aliases
 	cm = commit -am
+	rh = reset --hard @
 	r1 = reset @^
 
 	# my `git log --graph --decorate`
@@ -38,7 +39,7 @@
 	diff-char = diff --color-words='.'
 
 	# amend a commit without changing its commit message
-	amend = commit --amend --no-edit
+	amend = commit --amend -a --no-edit
 
 	# create an orphan branch
 	orphan = "!f() { git checkout --orphan $1 && git rm -r --cached $(git root-dir); }; f"
