@@ -157,9 +157,6 @@ if uname -r | grep -q 'Microsoft'; then
   }
   alias open='wsl-open'
 
-  # see https://github.com/microsoft/terminal/issues/1060
-  if [ "${PWD,,}" = '/mnt/c/windows/system32' ]; then cd; fi
-
   export DOTFILES_DIR="$(dirname "$(readlink -f "$HOME/.bashrc")")"
   alias cddf='cd $DOTFILES_DIR'
 fi
