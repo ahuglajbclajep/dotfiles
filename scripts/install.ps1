@@ -9,8 +9,8 @@ $wtdir = Get-ChildItem "$env:LOCALAPPDATA\Packages" | Where-Object Name -match '
     Select-Object -ExpandProperty 'FullName'
 
 $mappings = @(
-    @{ 'from' = '..\.config\Code\User\settings.json'; 'to' = "$env:APPDATA\Code\User\settings.json" },
-    @{ 'from' = '..\other\profiles.json'; 'to' = "$wtdir\LocalState\profiles.json" }
+    @{ 'name' = 'code'; 'from' = '..\.config\Code\User\settings.json'; 'to' = "$env:APPDATA\Code\User\settings.json" },
+    @{ 'name' = 'wt'; 'from' = '..\other\profiles.json'; 'to' = "$wtdir\LocalState\profiles.json" }
 )
 
 
@@ -20,7 +20,10 @@ if ($yn -eq 'y') {
         Write-Host 'creating a symbolic link on Windows requires elevation as administrator.' -ForegroundColor Red
     } else {
         foreach ($m in $mappings) {
+            if (($m.name -eq 'wt') -and (!$wtdir)) { continue }
+
             New-Item -ItemType Directory -Path (Split-Path -Parent $m.to) -Force > $null
+            # see https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_commonparameters#confirm
             New-Item -ItemType SymbolicLink -Path $m.to -Value $m.from -Force -cf:(Test-Path $m.to) > $null
         }
     }
