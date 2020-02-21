@@ -4,13 +4,15 @@ $ErrorActionPreference = "Stop"
 $isadmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(
     [Security.Principal.WindowsBuiltInRole] "Administrator")
 
-$wtdir = Get-ChildItem "$env:LOCALAPPDATA/Packages" | Where-Object Name -match 'WindowsTerminal' |
+$wt = "$env:LOCALAPPDATA\Microsoft\WindowsApps\wt.exe"
+$wtdir = Get-ChildItem "$env:LOCALAPPDATA\Packages" | Where-Object Name -match 'WindowsTerminal' |
     Select-Object -ExpandProperty 'FullName'
 
 $mappings = @(
     @{ 'from' = '..\.config\Code\User\settings.json'; 'to' = "$env:APPDATA\Code\User\settings.json" },
     @{ 'from' = '..\other\profiles.json'; 'to' = "$wtdir\LocalState\profiles.json" }
 )
+
 
 $yn = Read-Host 'create symbolic links? (y/N)'
 if ($yn -eq 'y') {
@@ -21,6 +23,16 @@ if ($yn -eq 'y') {
             New-Item -ItemType Directory -Path (Split-Path -Parent $m.to) -Force > $null
             New-Item -ItemType SymbolicLink -Path $m.to -Value $m.from -Force -cf:(Test-Path $m.to) > $null
         }
+    }
+}
+
+$yn = Read-Host 'add "Open with Terminal" into right-click context menu? (y/N)'
+if ($yn -eq 'y') {
+    $targets = @('Directory', 'Directory\Background')
+
+    foreach ($t in $targets) {
+        New-Item -Path "HKCU:\Software\Classes\$t\shell\MyTerminal" -Value 'Open with Terminal' -Force > $null
+        New-Item -Path "HKCU:\Software\Classes\$t\shell\MyTerminal\command" -Value "$wt -d `"%V`"" -Force > $null
     }
 }
 
