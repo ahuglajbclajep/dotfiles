@@ -25,5 +25,16 @@
   "[dockerfile]": {
     "editor.detectIndentation": false,
     "editor.tabSize": 2
-  }
+  },
+  // powershell
+  "powershell.codeFormatting.autoCorrectAliases": true,
+  "powershell.codeFormatting.useCorrectCasing": true,
+  "powershell.codeFormatting.newLineAfterCloseBrace": false,
+  "powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationAfterEveryPipeline",
+
+  /* automatically changed by extensions */
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }

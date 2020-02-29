@@ -1,11 +1,14 @@
 CoenraadS.bracket-pair-colorizer
 dbaeumer.vscode-eslint
+eamodio.gitlens
 esbenp.prettier-vscode
 formulahendry.terminal
 humao.rest-client
 ms-vscode-remote.remote-wsl
+ms-vscode.powershell
 oderwat.indent-rainbow
 stkb.rewrap
+stylelint.vscode-stylelint
 timonwong.shellcheck
 tombonnike.vscode-status-bar-format-toggle
 VisualStudioExptTeam.vscodeintellicode
