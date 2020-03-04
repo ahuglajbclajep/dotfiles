@@ -15,7 +15,7 @@ if [ "$yn" = 'y' ]; then
 fi
 
 read -rp 'install VS Code extensions? (y/N): ' yn
-if [ "$yn" = 'y' ] && type code > /dev/null 2>&1; then
+if [ "$yn" = 'y' ] && type code >/dev/null 2>&1; then
   while read -r line; do
     code --install-extension "$line"
   done < '../other/vscode-extensions.txt'

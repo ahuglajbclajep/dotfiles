@@ -1,6 +1,6 @@
 # dotfiles
 
-My dotfiles for Ubuntu Desktop and WSL.
+My dotfiles for Ubuntu 18.04.
 
 ## install
 
@@ -20,5 +20,5 @@ $ git clone https://github.com/ahuglajbclajep/dotfiles.git ~/.dotfiles && ~/.dot
 ## update
 
 ```sh
-git pull
+$ git pull
 ```
