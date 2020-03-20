@@ -32,6 +32,16 @@ esac
 
 printf 'run in %s mode.\n' $os
 
+[ "$os" = 'MACOS' ] && \
+read -rp 'install homebrew and formulae? (y/N): ' yn
+if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
+  if ! type brew >/dev/null 2>&1; then
+    # see https://brew.sh/#install
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | /bin/bash
+  fi
+  brew bundle
+fi
+
 # TODO: ln .zshrc
 [ "$os" != 'MACOS' ] && \
 read -rp 'create symbolic links? (y/N): ' yn
