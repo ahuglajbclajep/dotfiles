@@ -156,9 +156,6 @@ if uname -r | grep -q 'Microsoft'; then
     fi
   }
   alias open='wsl-open'
-
-  export DOTFILES_DIR="$(dirname "$(readlink -f "$HOME/.bashrc")")"
-  alias cddf='cd $DOTFILES_DIR'
 fi
 
 ggl() {

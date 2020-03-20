@@ -32,4 +32,6 @@ fi
 export UMAKE_ROOT="$HOME/.local/share/umake"
 
 # others
+export DOTFILES_ROOT="$(readlink -f "$HOME/.profile" | xargs -0 dirname | xargs -0 dirname)"
+
 PATH="$UMAKE_ROOT/bin:$PATH"
