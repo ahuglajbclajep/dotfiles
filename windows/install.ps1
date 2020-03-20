@@ -9,8 +9,8 @@ $wtdir = Get-ChildItem "$env:LOCALAPPDATA\Packages" | Where-Object Name -match '
     Select-Object -ExpandProperty 'FullName'
 
 $mappings = @(
-    @{ 'name' = 'code'; 'from' = '..\.config\Code\User\settings.json'; 'to' = "$env:APPDATA\Code\User\settings.json" },
-    @{ 'name' = 'wt'; 'from' = '..\other\profiles.json'; 'to' = "$wtdir\LocalState\profiles.json" }
+    @{ 'name' = 'code'; 'from' = '..\vscode\settings.json'; 'to' = "$env:APPDATA\Code\User\settings.json" },
+    @{ 'name' = 'wt'; 'from' = 'profiles.json'; 'to' = "$wtdir\LocalState\profiles.json" }
 )
 
 
@@ -58,7 +58,7 @@ if ($yn -eq 'y') {
 
 $yn = Read-Host 'install VS Code extensions? (y/N)'
 if (($yn -eq 'y') -and (Get-Command 'code' -ea SilentlyContinue)) {
-    foreach ($e in Get-Content '..\other\vscode-extensions.txt') {
+    foreach ($e in Get-Content '..\vscode\_extensions.txt') {
         code --install-extension "$e"
     }
 }
