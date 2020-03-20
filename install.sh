@@ -43,7 +43,7 @@ if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
 fi
 
 read -rp 'create symbolic links? (y/N): ' yn
-if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
+if [ "$yn" = 'y' ]; then
   for mapping in "${mappings[@]}"; do
     from="${mapping%:*}"
     to="${mapping#*:}"

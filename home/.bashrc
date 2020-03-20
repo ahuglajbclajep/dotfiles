@@ -123,6 +123,10 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
+if [ ! -f "$NVM_DIR/default-packages" ]; then
+  printf 'yarn\n' > "$NVM_DIR/default-packages"
+fi
+
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
