@@ -2,29 +2,40 @@
 
 cd "$(dirname "$0")"
 
-if uname -r | grep -q 'Microsoft'; then
-  arch='UBUNTU_WSL'
+if [ "$(uname)" = 'Darwin' ]; then
+  os='MACOS'
+  find . -type f -name '.DS_Store' -delete
+elif uname -v | grep -q 'Ubuntu'; then
+  os='UBUNTU_DESKTOP'
 else
-  arch='UBUNTU_DESKTOP'
+  os='UBUNTU_WSL'
 fi
 
-UBUNTU_WSL=("home:$HOME")
+MACOS=(
+  "home:$HOME"
+  "vscode:$HOME/Library/Application Support/Code/User"
+)
 UBUNTU_DESKTOP=(
   "home:$HOME"
   "vscode:$HOME/.config/Code/User"
 )
-case $arch in
-  'UBUNTU_WSL' ) mappings=("${UBUNTU_WSL[@]}") ;;
+UBUNTU_WSL=("home:$HOME")
+case $os in
+  'MACOS' ) mappings=("${MACOS[@]}") ;;
   'UBUNTU_DESKTOP' ) mappings=("${UBUNTU_DESKTOP[@]}") ;;
+  'UBUNTU_WSL' ) mappings=("${UBUNTU_WSL[@]}") ;;
 esac
 
-sed -i '/^[^#].*\(remote-wsl\|powershell\)$/ s/^/#/' vscode/_extensions.txt
+# TODO: Update windows/install.ps1 and delete this line.
+# sed -i '/^[^#].*\(remote-wsl\|powershell\)$/ s/^/#/' vscode/_extensions.txt
 
 
-printf 'run in %s mode.\n' $arch
+printf 'run in %s mode.\n' $os
 
+# TODO: ln .zshrc
+[ "$os" != 'MACOS' ] && \
 read -rp 'create symbolic links? (y/N): ' yn
-if [ "$yn" = 'y' ]; then
+if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
   for d in "${mappings[@]}"; do
     key="${d%:*}"
     value="${d#*:}"
@@ -42,7 +53,7 @@ if [ "$yn" = 'y' ]; then
   . ~/.profile
 fi
 
-[ "$arch" != 'UBUNTU_WSL' ] && \
+[ "$os" != 'UBUNTU_WSL' ] && \
 read -rp 'install VS Code extensions? (y/N): ' yn
 if [ $? -eq 0 ] && [ "$yn" = 'y' ] && type code >/dev/null 2>&1; then
   while read -r extension; do
