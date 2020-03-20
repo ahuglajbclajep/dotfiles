@@ -1,8 +1,8 @@
 {
   /* editor */
   "workbench.startupEditor": "newUntitledFile",
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe",
   "files.defaultLanguage": "markdown",
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe",
 
   /* render */
   "editor.renderWhitespace": "all",
@@ -27,6 +27,10 @@
     "editor.tabSize": 2
   },
   // powershell
+  "[powershell]": {
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2
+  },
   "powershell.codeFormatting.autoCorrectAliases": true,
   "powershell.codeFormatting.useCorrectCasing": true,
   "powershell.codeFormatting.newLineAfterCloseBrace": false,
