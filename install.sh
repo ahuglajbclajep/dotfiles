@@ -42,18 +42,16 @@ if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
   brew bundle
 fi
 
-# TODO: ln .zshrc
-[ "$os" != 'MACOS' ] && \
 read -rp 'create symbolic links? (y/N): ' yn
 if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
-  for d in "${mappings[@]}"; do
-    key="${d%:*}"
-    value="${d#*:}"
+  for mapping in "${mappings[@]}"; do
+    from="${mapping%:*}"
+    to="${mapping#*:}"
 
-    files=$(find "$key" -type f ! -name '_*')
+    files=$(find "$from" -type f ! -name '_*')
     defaultIFS="$IFS"; IFS=$'\n'
     for file in $files; do
-      target="$value/${file#*/}"
+      target="$to/${file#*/}"
       mkdir -p "${target%/*}"
       ln -is "$PWD/$file" "$target"
     done
