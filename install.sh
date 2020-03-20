@@ -7,7 +7,6 @@ if uname -r | grep -q 'Microsoft'; then
 else
   arch='UBUNTU_DESKTOP'
 fi
-printf 'run in %s mode.\n' $arch
 
 UBUNTU_WSL=("home:$HOME")
 UBUNTU_DESKTOP=(
@@ -18,6 +17,11 @@ case $arch in
   'UBUNTU_WSL' ) mappings=("${UBUNTU_WSL[@]}") ;;
   'UBUNTU_DESKTOP' ) mappings=("${UBUNTU_DESKTOP[@]}") ;;
 esac
+
+sed -i '/^[^#].*\(remote-wsl\|powershell\)$/ s/^/#/' vscode/_extensions.txt
+
+
+printf 'run in %s mode.\n' $arch
 
 read -rp 'create symbolic links? (y/N): ' yn
 if [ "$yn" = 'y' ]; then
@@ -42,6 +46,7 @@ fi
 read -rp 'install VS Code extensions? (y/N): ' yn
 if [ $? -eq 0 ] && [ "$yn" = 'y' ] && type code >/dev/null 2>&1; then
   while read -r extension; do
+    if [[ "$extension" = \#* ]]; then continue; fi
     code --install-extension "$extension"
-  done < 'vscode/_extensions.txt'
+  done < vscode/_extensions.txt
 fi
