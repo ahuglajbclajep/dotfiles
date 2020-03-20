@@ -7,7 +7,7 @@ if uname -r | grep -q 'Microsoft'; then
 else
   arch='UBUNTU_DESKTOP'
 fi
-printf 'arch: %s\n' $arch
+printf 'run in %s mode.\n' $arch
 
 UBUNTU_WSL=("home:$HOME")
 UBUNTU_DESKTOP=(
@@ -38,11 +38,10 @@ if [ "$yn" = 'y' ]; then
   . ~/.profile
 fi
 
-if [ "$arch" != 'UBUNTU_WSL' ]; then
-  read -rp 'install VS Code extensions? (y/N): ' yn
-  if [ "$yn" = 'y' ] && type code >/dev/null 2>&1; then
-    while read -r extension; do
-      code --install-extension "$extension"
-    done < 'vscode/_extensions.txt'
-  fi
+[ "$arch" != 'UBUNTU_WSL' ] && \
+read -rp 'install VS Code extensions? (y/N): ' yn
+if [ $? -eq 0 ] && [ "$yn" = 'y' ] && type code >/dev/null 2>&1; then
+  while read -r extension; do
+    code --install-extension "$extension"
+  done < 'vscode/_extensions.txt'
 fi
