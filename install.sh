@@ -55,7 +55,8 @@ if [ "$yn" = 'y' ]; then
     IFS="$defaultIFS"
   done
 
-  . ~/.profile
+  # reread environment variables, etc
+  . "$HOME/.profile"
 fi
 
 [ "$os" != 'UBUNTU_WSL' ] && \
@@ -70,6 +71,7 @@ fi
 [ "$os" = 'MACOS' ] && \
 read -rp 'customize Finder? (y/N): ' yn
 if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
+  # about generating .DS_Store
   defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 

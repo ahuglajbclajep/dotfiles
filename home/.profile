@@ -18,7 +18,8 @@ if [ -d "$HOME/.local/share/umake/bin" ]; then
 fi
 
 ## others ##
-# TODO: support BSD readlink
+
+# mainly for Ubuntu on WSL
 if readlink --version >/dev/null 2>&1; then
   export DOTFILES_ROOT="$(readlink -f "$HOME/.profile" | xargs -0 dirname | xargs -0 dirname)"
 fi
