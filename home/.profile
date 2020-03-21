@@ -1,6 +1,6 @@
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by shell, if ~/.*profile, ~/.*login, etc., exists.
-# see https://www.gnu.org/software/bash/manual/bash.html#Bash-Startup-Files and
+# See https://www.gnu.org/software/bash/manual/bash.html#Bash-Startup-Files and
 # http://zsh.sourceforge.net/Guide/zshguide02.html for examples.
 
 # set PATH so it includes user's private bin if it exists

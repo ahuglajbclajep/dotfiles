@@ -2,8 +2,8 @@
 # see http://zsh.sourceforge.net/Guide/zshguide02.html
 
 # read ~/.profile
-# see https://superuser.com/questions/187639/zsh-not-hitting-profile
-[ -f "$HOME/.profile" ] && emulate sh -c ". $HOME/.profile"
+# see https://support.apple.com/kb/HT208050
+[[ -e "$HOME/.profile" ]] && emulate sh -c ". $HOME/.profile"
 
 # read ~/.zshrc for SSH connection
 # WARNING: `. ~/.zshrc` is so slow that plugins are not read correctly

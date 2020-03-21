@@ -29,7 +29,8 @@ setopt nobeep
 export EDITOR=code
 
 ## nvm ##
-# if ~/.nvm/* exists from the beginning, `git clone` fails
+# If ~/.nvm/* exists from the beginning, `antigen bundle lukechilds/zsh-nvm`
+# fails due to `git clone`.
 if [ ! -f "$NVM_DIR/default-packages" ]; then
   printf 'yarn\n' > "$NVM_DIR/default-packages"
 fi
