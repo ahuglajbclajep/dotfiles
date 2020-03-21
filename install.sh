@@ -66,3 +66,16 @@ if [ $? -eq 0 ] && [ "$yn" = 'y' ] && type code >/dev/null 2>&1; then
     code --install-extension "$extension"
   done < vscode/_extensions.txt
 fi
+
+[ "$os" = 'MACOS' ] && \
+read -rp 'customize Finder? (y/N): ' yn
+if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
+  defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+  defaults write com.apple.finder AppleShowAllFiles -bool true
+  defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+  defaults write com.apple.finder ShowPathbar -bool true
+
+  killall Finder
+fi
