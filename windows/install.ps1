@@ -1,5 +1,10 @@
 $ErrorActionPreference = "Stop"
 
+# this line also works if you write `bash -c "sed -i 's/^#//' ../vscode/_extensions.txt"`
+# via an array of bytes to save the input file in UTF8 without BOM
+[Text.Encoding]::UTF8.GetBytes([string]::Join("`n", (Get-Content '..\vscode\_extensions.txt' |
+        ForEach-Object { $_ -replace '^#', '' }))) | Set-Content '..\vscode\_extensions.txt' -Encoding Byte
+
 # see https://devblogs.microsoft.com/scripting/check-for-admin-credentials-in-a-powershell-script/
 $isadmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(
   [Security.Principal.WindowsBuiltInRole] "Administrator")

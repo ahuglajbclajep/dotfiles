@@ -3,8 +3,8 @@ dbaeumer.vscode-eslint
 esbenp.prettier-vscode
 formulahendry.terminal
 humao.rest-client
-ms-vscode-remote.remote-wsl
-ms-vscode.powershell
+#ms-vscode-remote.remote-wsl
+#ms-vscode.powershell
 oderwat.indent-rainbow
 stkb.rewrap
 stylelint.vscode-stylelint
