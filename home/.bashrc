@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# this file is based on the Ubuntu 18.04 default ~/.bashrc
+# if the `bash` command is executed on macOS, stop reading this script
 if [ "$(uname)" = 'Darwin' ]; then
   # see https://support.apple.com/kb/HT208050
   export BASH_SILENCE_DEPRECATION_WARNING=1
@@ -124,6 +126,7 @@ if ! shopt -oq posix; then
 fi
 
 
+# TODO: clean up and move some scripts to ~/.profile
 # my settings
 # nvm
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"

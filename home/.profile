@@ -3,6 +3,11 @@
 # See https://www.gnu.org/software/bash/manual/bash.html#Bash-Startup-Files and
 # http://zsh.sourceforge.net/Guide/zshguide02.html for examples.
 
+# ~/.bashrc is not automatically read
+if [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ]; then
+  . "$HOME/.bashrc"
+fi
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then PATH="$HOME/bin:$PATH"; fi
 if [ -d "$HOME/.local/bin" ]; then PATH="$HOME/.local/bin:$PATH"; fi

@@ -26,9 +26,6 @@ case $os in
   'UBUNTU_WSL' ) mappings=("${UBUNTU_WSL[@]}") ;;
 esac
 
-# TODO: Update windows/install.ps1 and delete this line.
-# sed -i '/^[^#].*\(remote-wsl\|powershell\)$/ s/^/#/' vscode/_extensions.txt
-
 
 printf 'run in %s mode.\n' $os
 
