@@ -2,6 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+
 # this file is based on the Ubuntu 18.04 default ~/.bashrc
 # if the `bash` command is executed on macOS, stop reading this script
 if [ "$(uname)" = 'Darwin' ]; then
@@ -126,35 +127,42 @@ if ! shopt -oq posix; then
 fi
 
 
-# TODO: clean up and move some scripts to ~/.profile
-# my settings
-# nvm
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+## *env ##
+if [ -d "$HOME/.nvm" ]; then
+  # see https://github.com/nvm-sh/nvm/tree/v0.35.3#install--update-script
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-if [ ! -f "$NVM_DIR/default-packages" ]; then
-  printf 'yarn\n' > "$NVM_DIR/default-packages"
+  # see https://github.com/nvm-sh/nvm/tree/v0.35.3#bash-completion
+  [[ -r $NVM_DIR/bash_completion ]] && \. $NVM_DIR/bash_completion
+
+  [ ! -f "$NVM_DIR/default-packages" ] && printf 'yarn\n' > "$NVM_DIR/default-packages"
 fi
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
+if [ -d "$HOME/.pyenv" ]; then
+  # see https://github.com/pyenv/pyenv/tree/v1.2.17#basic-github-checkout
+  export PYENV_ROOT="$HOME/.pyenv"
+  PATH="$PYENV_ROOT/bin:$PATH"
 
-# sdkman
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+  # see https://github.com/pyenv/pyenv/tree/v1.2.17#basic-github-checkout
+  if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
+fi
 
-# others
-PATH="$PYENV_ROOT/bin:$PATH"
+if [ -d "$HOME/.sdkman" ]; then
+  export SDKMAN_DIR="$HOME/.sdkman"
+  [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+fi
+
+## aliases ##
 alias open='xdg-open'
+
 # for umake
 if type visual-studio-code > /dev/null 2>&1; then
   code() { visual-studio-code "$@"; }
   export -f code
 fi
 
-# WSL
+## WSL ##
 if uname -r | grep -q 'Microsoft'; then
   # see https://www.kwbtblog.com/entry/2019/04/27/023411
   export LS_COLORS='ow=01;33'
@@ -172,6 +180,7 @@ if uname -r | grep -q 'Microsoft'; then
   alias open='wsl-open'
 fi
 
+## commands ##
 ggl() {
   if [ $# -eq 0 ]; then return 1; fi
   open "https://www.google.com/search?q=$(echo "$@" | sed 's/+/%2B/g;s/ /+/g')"
