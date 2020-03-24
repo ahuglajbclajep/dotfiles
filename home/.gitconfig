@@ -34,11 +34,12 @@
 	# show all aliases
 	aliases = !git config --name-only --get-regexp ^alias | cut -c 7-
 
-	# my `git log --graph --decorate`
-	tree-v = log --graph --pretty=format:'%x09%C(yellow)%h%Creset %C(magenta)<%an>%Creset%C(cyan)%d%Creset%n%x09%x09%Cgreen[%ci, %cr]%Creset %s'
-
 	# my `git log --graph --decorate --oneline`
-	tree = log --graph --pretty=format:'%x09%C(yellow)%h%Creset%C(cyan)%d%Creset %C(magenta)<%an>%Creset %Cgreen[%ci]%Creset %s'
+	# see https://git-scm.com/docs/git-log#_pretty_formats
+	tree = log --graph --date=short --pretty=format:'%x09%C(yellow)%h%C(cyan)%d %C(magenta)<%><(10,trunc)%an> %Cgreen[%cd] %Creset%s'
+
+	# my `git log --graph --decorate`
+	tree-v = log --graph --pretty=format:'%x09%C(yellow)%h%Creset:%C(cyan)%d%n%x09  %C(magenta)<%an> %Cgreen[%ci, %cr]%n%x09  %Creset%s%n'
 
 	# show differences character by character
 	diff-char = diff --color-words='.'
