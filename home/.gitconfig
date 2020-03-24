@@ -10,6 +10,7 @@
 	editor = code -w
 
 [credential]
+	# see https://git-scm.com/docs/git-credential-cache
 	helper = cache
 
 [push]
@@ -20,6 +21,7 @@
 
 [alias]
 	# util
+	# see https://git-scm.com/docs/git-rev-parse
 	root-dir = rev-parse --show-toplevel
 	current-branch = rev-parse --abbrev-ref @
 	current-remote-branch = rev-parse --abbrev-ref @{u}
@@ -29,6 +31,9 @@
 	rh = reset --hard @
 	r1 = reset @^
 
+	# show all aliases
+	aliases = !git config --name-only --get-regexp ^alias | cut -c 7-
+
 	# my `git log --graph --decorate`
 	tree-v = log --graph --pretty=format:'%x09%C(yellow)%h%Creset %C(magenta)<%an>%Creset%C(cyan)%d%Creset%n%x09%x09%Cgreen[%ci, %cr]%Creset %s'
 
@@ -37,6 +42,12 @@
 
 	# show differences character by character
 	diff-char = diff --color-words='.'
+
+	# shallow clone
+	clone1 = clone --depth 1 --shallow-submodules
+
+	# set the execute permission
+	chmodx = update-index --chmod=+x
 
 	# amend a commit without changing its commit message
 	amend = commit --amend -a --no-edit
