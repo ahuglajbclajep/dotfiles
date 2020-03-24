@@ -1,3 +1,4 @@
+// see https://code.visualstudio.com/docs/getstarted/settings#_default-settings
 {
   /* editor */
   "workbench.startupEditor": "newUntitledFile",
@@ -6,7 +7,6 @@
 
   /* render */
   "editor.renderWhitespace": "all",
-  "editor.semanticHighlighting.enabled": true,
   "editor.wordWrap": "on",
   "editor.rulers": [80, 120],
 
