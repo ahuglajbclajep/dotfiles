@@ -5,9 +5,9 @@
 # see https://support.apple.com/kb/HT208050
 [[ -e "$HOME/.profile" ]] && emulate sh -c ". $HOME/.profile"
 
-# for Homebrew
+# for Homebrew on Linux
 # see https://docs.brew.sh/Homebrew-on-Linux#install
-[ "$(uname)" != 'Darwin' ] && eval "$("$(brew --prefix)/bin/brew" shellenv)"
+[ "$(uname)" != 'Darwin' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # mainly for Ubuntu on WSL
 if readlink --version >/dev/null 2>&1; then

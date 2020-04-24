@@ -34,6 +34,10 @@ if [ ! -f "$NVM_DIR/default-packages" ]; then
   echo 'yarn' > "$NVM_DIR/default-packages"
 fi
 
+## others ##
+# for Homebrew on Linux
+[ "$(uname)" != 'Darwin' ] && umask 002
+
 ## aliases ##
 type xdg-open >/dev/null 2>&1 && alias open='xdg-open'
 

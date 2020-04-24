@@ -37,7 +37,10 @@ if [ "$yn" = 'y' ]; then
   if ! type brew >/dev/null 2>&1; then
     # see https://brew.sh/#install
     curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | /bin/bash
-    [ -d '/home/linuxbrew/.linuxbrew' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    if [ -d '/home/linuxbrew/.linuxbrew' ]; then
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      umask 002 # for `brew doctor`
+    fi
   fi
   brew bundle
 fi
