@@ -36,7 +36,7 @@
 
 	# my `git log --graph --decorate --oneline`
 	# see https://git-scm.com/docs/git-log#_pretty_formats
-	tree = log --graph --date=short --pretty=format:'%x09%C(yellow)%h%C(cyan)%d %C(magenta)<%><(10,trunc)%an> %Cgreen[%cd] %Creset%s'
+	tree = log --graph --date=short --pretty=format:'%x09%C(yellow)%h%C(cyan)%d %C(magenta)%><(7,trunc)%an %Cgreen[%cd] %Creset%s'
 
 	# my `git log --graph --decorate`
 	tree-v = log --graph --pretty=format:'%x09%C(yellow)%h%Creset:%C(cyan)%d%n%x09  %C(magenta)<%an> %Cgreen[%ci, %cr]%n%x09  %Creset%s%n'
@@ -51,7 +51,7 @@
 	chmodx = update-index --chmod=+x
 
 	# amend a commit without changing its commit message
-	amend = commit --amend -a --no-edit
+	amend = commit --amend --no-edit
 
 	# create an orphan branch
 	orphan = "!f() { git checkout --orphan $1 && git rm -r --cached $(git root-dir); }; f"
