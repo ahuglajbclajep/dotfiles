@@ -5,8 +5,11 @@
 # see https://support.apple.com/kb/HT208050
 [[ -e "$HOME/.profile" ]] && emulate sh -c ". $HOME/.profile"
 
-# read ~/.zshrc for SSH connection
-# WARNING: `. ~/.zshrc` is so slow that plugins are not read correctly
-#if [ -n "$ZSH_VERSION" ] && [ -f "$HOME/.zshrc" ]; then
-#  . "$HOME/.zshrc"
-#fi
+# for Homebrew
+# see https://docs.brew.sh/Homebrew-on-Linux#install
+[ "$(uname)" != 'Darwin' ] && eval "$("$(brew --prefix)/bin/brew" shellenv)"
+
+# mainly for Ubuntu on WSL
+if readlink --version >/dev/null 2>&1; then
+  export DOTFILES_ROOT="$(readlink -f "$HOME/.profile" | xargs -0 dirname | xargs -0 dirname)"
+fi

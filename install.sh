@@ -4,11 +4,15 @@ cd "$(dirname "$0")"
 
 if [ "$(uname)" = 'Darwin' ]; then
   os='MACOS'
+  sed -i '/zsh/s/^/# /' Brewfile
   find . -type f -name '.DS_Store' -delete
+  # see https://support.apple.com/kb/HT208050
+  [ ! -f "$HOME/.bashrc" ] && echo 'export BASH_SILENCE_DEPRECATION_WARNING=1' > "$HOME/.bashrc"
 elif uname -v | grep -q 'Ubuntu'; then
   os='UBUNTU_DESKTOP'
 else
   os='UBUNTU_WSL'
+  sed -i '/cask/s/^/# /' Brewfile
 fi
 
 MACOS=(
@@ -29,14 +33,20 @@ esac
 
 printf 'run in %s mode.\n' $os
 
-[ "$os" = 'MACOS' ] && \
 read -rp 'install homebrew and formulae? (y/N): ' yn
-if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
+if [ "$yn" = 'y' ]; then
   if ! type brew >/dev/null 2>&1; then
     # see https://brew.sh/#install
     curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | /bin/bash
+    [ -d "$HOME/.linuxbrew" ] && eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
   fi
   brew bundle
+fi
+
+read -rp 'change default shell to zsh? (y/N): ' yn
+if [ "$yn" = 'y' ]; then
+  grep -q 'zsh' /etc/shells || echo "$(brew --prefix)/bin/zsh" >> /etc/shells
+  chsh -s "$(grep 'zsh' /etc/shells)"
 fi
 
 read -rp 'create symbolic links? (y/N): ' yn
@@ -54,9 +64,6 @@ if [ "$yn" = 'y' ]; then
     done
     IFS="$defaultIFS"
   done
-
-  # reread environment variables, etc
-  . "$HOME/.profile"
 fi
 
 [ "$os" != 'UBUNTU_WSL' ] && \
