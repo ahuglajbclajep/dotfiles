@@ -4,7 +4,6 @@ cd "$(dirname "$0")"
 
 if [ "$(uname)" = 'Darwin' ]; then
   os='MACOS'
-  sed -i '/zsh/s/^/# /' Brewfile
   find . -type f -name '.DS_Store' -delete
   # see https://support.apple.com/kb/HT208050
   [ ! -f "$HOME/.bashrc" ] && echo 'export BASH_SILENCE_DEPRECATION_WARNING=1' > "$HOME/.bashrc"
@@ -12,7 +11,7 @@ elif uname -v | grep -q 'Ubuntu'; then
   os='UBUNTU_DESKTOP'
 else
   os='UBUNTU_WSL'
-  sed -i '/cask/s/^/# /' Brewfile
+  sed -i '/shellcheck/s/^/# /' Brewfile
 fi
 
 MACOS=(
