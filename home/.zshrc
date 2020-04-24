@@ -50,8 +50,8 @@ if uname -r | grep -q 'Microsoft'; then
   wsl-open() {
     if [ $# -ne 1 ]; then return 1; fi
     if [ -e "$1" ]; then
-      local path=$(readlink -f "$1" | xargs -0 wslpath -w)
-      powershell.exe start "\"${path%?}\""
+      local winpath=$(readlink -f "$1" | xargs -0 wslpath -w)
+      powershell.exe start "\"${winpath%?}\""
     else
       powershell.exe start "$1"
     fi

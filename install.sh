@@ -37,16 +37,13 @@ if [ "$yn" = 'y' ]; then
   if ! type brew >/dev/null 2>&1; then
     # see https://brew.sh/#install
     curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | /bin/bash
-    if [ -d '/home/linuxbrew/.linuxbrew' ]; then
-      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-      umask 002 # for `brew doctor`
-    fi
+    [ -d '/home/linuxbrew/.linuxbrew' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   fi
   brew bundle
 fi
 
 read -rp 'change default shell to zsh? (y/N): ' yn
-if [ "$yn" = 'y' ]; then
+if [ "$yn" = 'y' ] && type brew >/dev/null 2>&1; then
   grep -q 'zsh' /etc/shells || echo "$(brew --prefix)/bin/zsh" | sudo tee -a /etc/shells >/dev/null
   chsh -s "$(grep 'zsh' /etc/shells)"
 fi
