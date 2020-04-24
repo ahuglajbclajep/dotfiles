@@ -15,6 +15,7 @@ $ git clone https://github.com/ahuglajbclajep/dotfiles.git ~/.dotfiles && ~/.dot
 ### Ubuntu Desktop
 
 ```sh
+$ sudo apt-get install build-essential curl file git
 $ git clone https://github.com/ahuglajbclajep/dotfiles.git ~/.dotfiles && ~/.dotfiles/install.sh
 ```
 

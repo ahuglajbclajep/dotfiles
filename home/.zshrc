@@ -28,9 +28,33 @@ setopt nobeep
 # for `zshrc` command
 export EDITOR=code
 
-## nvm ##
-# If ~/.nvm/* exists from the beginning, `antigen bundle lukechilds/zsh-nvm`
-# fails due to `git clone`.
+## *env ##
+# if ~/.nvm/* exists from the beginning, `antigen bundle lukechilds/zsh-nvm` fails due to `git clone`
 if [ ! -f "$NVM_DIR/default-packages" ]; then
-  printf 'yarn\n' > "$NVM_DIR/default-packages"
+  echo 'yarn' > "$NVM_DIR/default-packages"
+fi
+
+## others ##
+# for Homebrew on Linux
+[ "$(uname)" != 'Darwin' ] && umask 002
+
+## aliases ##
+type xdg-open >/dev/null 2>&1 && alias open='xdg-open'
+
+## WSL ##
+if uname -r | grep -q 'Microsoft'; then
+  # see https://www.kwbtblog.com/entry/2019/04/27/023411
+  export LS_COLORS='ow=01;33'
+
+  # see https://qiita.com/ahuglajbclajep/items/7e72acd689c7b302795a
+  wsl-open() {
+    if [ $# -ne 1 ]; then return 1; fi
+    if [ -e "$1" ]; then
+      local winpath=$(readlink -f "$1" | xargs -0 wslpath -w)
+      powershell.exe start "\"${winpath%?}\""
+    else
+      powershell.exe start "$1"
+    fi
+  }
+  alias open='wsl-open'
 fi
