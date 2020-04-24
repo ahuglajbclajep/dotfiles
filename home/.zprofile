@@ -11,5 +11,5 @@
 
 # mainly for Ubuntu on WSL
 if readlink --version >/dev/null 2>&1; then
-  export DOTFILES_ROOT="$(readlink -f "$HOME/.profile" | xargs -0 dirname | xargs -0 dirname)"
+  export DOTFILES_ROOT="$(readlink -f "$HOME/.zprofile" | sed 's:/[^/]*/[^/]*$::')"
 fi
