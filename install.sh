@@ -11,7 +11,7 @@ elif uname -v | grep -q 'Ubuntu'; then
   os='UBUNTU_DESKTOP'
 else
   os='UBUNTU_WSL'
-  sed -i '/shellcheck/s/^/# /' Brewfile
+  sed -i '/shellcheck/s/^\(# \)*/# /' Brewfile
 fi
 
 MACOS=(
@@ -44,7 +44,7 @@ fi
 
 read -rp 'change default shell to zsh? (y/N): ' yn
 if [ "$yn" = 'y' ]; then
-  grep -q 'zsh' /etc/shells || echo "$(brew --prefix)/bin/zsh" >> /etc/shells
+  grep -q 'zsh' /etc/shells || echo "$(brew --prefix)/bin/zsh" | sudo tee -a /etc/shells >/dev/null
   chsh -s "$(grep 'zsh' /etc/shells)"
 fi
 
