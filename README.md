@@ -26,6 +26,8 @@ $ git clone https://github.com/ahuglajbclajep/dotfiles.git ~/.dotfiles && ~/.dot
 > ~/.dotfiles/windows/install.bat
 ```
 
+You can share files between different distributions via folders in Windows, like `ln -s ${DOTFILES_ROOT%/*}/workspace ~/workspace`.
+
 ## update
 
 ```sh

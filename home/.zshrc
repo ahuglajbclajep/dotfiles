@@ -12,6 +12,7 @@ antigen bundle common-aliases
 antigen bundle lukechilds/zsh-nvm
 antigen bundle nvm
 antigen bundle yarn
+antigen bundle zsh-users/zsh-syntax-highlighting
 
 # load theme
 # see https://github.com/sindresorhus/pure/tree/v1.11.0#antigen
@@ -43,6 +44,9 @@ type xdg-open >/dev/null 2>&1 && alias open='xdg-open'
 if uname -r | grep -q 'Microsoft'; then
   # see https://www.kwbtblog.com/entry/2019/04/27/023411
   export LS_COLORS='ow=01;33'
+
+  # for remote-wsl extention
+  codew() { powershell.exe start code "$@"; }
 
   # see https://qiita.com/ahuglajbclajep/items/7e72acd689c7b302795a
   wsl-open() {
