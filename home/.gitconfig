@@ -9,6 +9,9 @@
 	excludesfile = ~/.gitignore_global
 	editor = code -w
 
+[commit]
+	template = ~/.commit_template
+
 [credential]
 	# see https://git-scm.com/docs/git-credential-cache
 	helper = cache
