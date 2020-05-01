@@ -42,8 +42,19 @@ if [ "$yn" = 'y' ]; then
   brew bundle
 fi
 
+! command -v zsh >/dev/null 2>&1 && command -v apt >/dev/null 2>&1 && \
+read -rp 'install zsh via apt? (y/N): ' yn
+if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
+  # see https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
+  sudo sh -c 'apt-get update && apt-get -y upgrade && apt-get -y install zsh'
+  # see https://github.com/zsh-users/antigen/issues/659 and
+  # https://github.com/zsh-users/antigen/wiki/Installation
+  curl -sSL git.io/antigen > antigen.zsh
+fi
+
+command -v zsh >/dev/null 2>&1 && \
 read -rp 'change default shell to zsh? (y/N): ' yn
-if [ "$yn" = 'y' ] && command -v zsh >/dev/null 2>&1; then
+if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
   grep -q 'zsh' /etc/shells || command -v zsh | sudo tee -a /etc/shells >/dev/null
   chsh -s "$(command -v zsh)"
 fi
@@ -65,9 +76,9 @@ if [ "$yn" = 'y' ]; then
   done
 fi
 
-[ "$os" != 'UBUNTU_WSL' ] && \
+[ "$os" != 'UBUNTU_WSL' ] && command -v code >/dev/null 2>&1 && \
 read -rp 'install VS Code extensions? (y/N): ' yn
-if [ $? -eq 0 ] && [ "$yn" = 'y' ] && command -v code >/dev/null 2>&1; then
+if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
   while read -r extension; do
     if [[ "$extension" = \#* ]]; then continue; fi
     code --install-extension "$extension"

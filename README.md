@@ -15,8 +15,10 @@ $ git clone https://github.com/ahuglajbclajep/dotfiles.git ~/.dotfiles && ~/.dot
 ### Ubuntu Desktop
 
 ```sh
-$ sudo apt-get install build-essential curl file git
+$ sudo apt-get install build-essential curl file git # if you want to install Homebrew
 $ git clone https://github.com/ahuglajbclajep/dotfiles.git ~/.dotfiles && ~/.dotfiles/install.sh
+# see https://github.com/zsh-users/zsh-completions/issues/433
+$ compaudit | xargs sudo chmod -R 755
 ```
 
 ### Ubuntu on WSL

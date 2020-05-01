@@ -6,7 +6,7 @@ if command -v brew >/dev/null 2>&1; then
   # see https://github.com/zsh-users/antigen/issues/159
   source "$(brew --prefix)/share/antigen/antigen.zsh"
 else
-  source "$DOTFILES_ROOT/.antigen.zsh"
+  source "$DOTFILES_ROOT/antigen.zsh"
 fi
 
 # load plugins
