@@ -43,9 +43,9 @@ if [ "$yn" = 'y' ]; then
 fi
 
 read -rp 'change default shell to zsh? (y/N): ' yn
-if [ "$yn" = 'y' ] && type brew >/dev/null 2>&1; then
-  grep -q 'zsh' /etc/shells || echo "$(brew --prefix)/bin/zsh" | sudo tee -a /etc/shells >/dev/null
-  chsh -s "$(grep 'zsh' /etc/shells)"
+if [ "$yn" = 'y' ] && type zsh >/dev/null 2>&1; then
+  grep -q 'zsh' /etc/shells || echo "$(which zsh)" | sudo tee -a /etc/shells >/dev/null
+  chsh -s "$(which zsh)"
 fi
 
 read -rp 'create symbolic links? (y/N): ' yn

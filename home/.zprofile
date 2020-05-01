@@ -7,7 +7,7 @@
 
 # for Homebrew on Linux
 # see https://docs.brew.sh/Homebrew-on-Linux#install
-[ "$(uname)" != 'Darwin' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ -d '/home/linuxbrew/.linuxbrew' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # mainly for Ubuntu on WSL
 if readlink --version >/dev/null 2>&1; then

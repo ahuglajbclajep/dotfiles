@@ -2,8 +2,12 @@
 # see http://zsh.sourceforge.net/Guide/zshguide02.html
 
 ## antigen ##
-# see https://github.com/zsh-users/antigen/issues/159
-source "$(brew --prefix)/share/antigen/antigen.zsh"
+if type brew >/dev/null 2>&1; then
+  # see https://github.com/zsh-users/antigen/issues/159
+  source "$(brew --prefix)/share/antigen/antigen.zsh"
+else
+  source "$DOTFILES_ROOT/.antigen.zsh"
+fi
 
 # load plugins
 antigen use oh-my-zsh
