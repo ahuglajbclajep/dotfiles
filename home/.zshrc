@@ -2,7 +2,7 @@
 # see http://zsh.sourceforge.net/Guide/zshguide02.html
 
 ## antigen ##
-if type brew >/dev/null 2>&1; then
+if command -v brew >/dev/null 2>&1; then
   # see https://github.com/zsh-users/antigen/issues/159
   source "$(brew --prefix)/share/antigen/antigen.zsh"
 else
@@ -42,7 +42,7 @@ fi
 [ "$(uname)" != 'Darwin' ] && umask 002
 
 ## aliases ##
-type xdg-open >/dev/null 2>&1 && alias open='xdg-open'
+command -v xdg-open >/dev/null 2>&1 && alias open='xdg-open'
 
 ## WSL ##
 if uname -r | grep -q 'Microsoft'; then

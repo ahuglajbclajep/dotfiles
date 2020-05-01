@@ -34,7 +34,7 @@ printf 'run in %s mode.\n' $os
 
 read -rp 'install homebrew and formulae? (y/N): ' yn
 if [ "$yn" = 'y' ]; then
-  if ! type brew >/dev/null 2>&1; then
+  if ! command -v brew >/dev/null 2>&1; then
     # see https://brew.sh/#install
     curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | /bin/bash
     [ -d '/home/linuxbrew/.linuxbrew' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -43,9 +43,9 @@ if [ "$yn" = 'y' ]; then
 fi
 
 read -rp 'change default shell to zsh? (y/N): ' yn
-if [ "$yn" = 'y' ] && type zsh >/dev/null 2>&1; then
-  grep -q 'zsh' /etc/shells || echo "$(which zsh)" | sudo tee -a /etc/shells >/dev/null
-  chsh -s "$(which zsh)"
+if [ "$yn" = 'y' ] && command -v zsh >/dev/null 2>&1; then
+  grep -q 'zsh' /etc/shells || command -v zsh | sudo tee -a /etc/shells >/dev/null
+  chsh -s "$(command -v zsh)"
 fi
 
 read -rp 'create symbolic links? (y/N): ' yn
@@ -67,7 +67,7 @@ fi
 
 [ "$os" != 'UBUNTU_WSL' ] && \
 read -rp 'install VS Code extensions? (y/N): ' yn
-if [ $? -eq 0 ] && [ "$yn" = 'y' ] && type code >/dev/null 2>&1; then
+if [ $? -eq 0 ] && [ "$yn" = 'y' ] && command -v code >/dev/null 2>&1; then
   while read -r extension; do
     if [[ "$extension" = \#* ]]; then continue; fi
     code --install-extension "$extension"
