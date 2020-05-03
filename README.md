@@ -14,6 +14,8 @@ $ git clone https://github.com/ahuglajbclajep/dotfiles.git ~/.dotfiles && ~/.dot
 
 ### Ubuntu Desktop
 
+Note: if you use GNOME Terminal, you need to [configure your profile to start it as a login shell](https://askubuntu.com/questions/132276/configure-gnome-terminal-to-start-bash-as-a-login-shell-doesnt-read-bashrc).
+
 ```sh
 $ sudo apt-get install build-essential curl file git # if you want to install Homebrew
 $ git clone https://github.com/ahuglajbclajep/dotfiles.git ~/.dotfiles && ~/.dotfiles/install.sh

@@ -46,7 +46,7 @@ fi
 read -rp 'install zsh via apt? (y/N): ' yn
 if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
   # see https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
-  sudo sh -c 'apt-get update && apt-get -y upgrade && apt-get -y install zsh'
+  sudo sh -c 'apt-get update && apt-get -y install zsh'
   # see https://github.com/zsh-users/antigen/issues/659 and
   # https://github.com/zsh-users/antigen/wiki/Installation
   curl -sSL git.io/antigen > antigen.zsh
@@ -75,6 +75,20 @@ if [ "$yn" = 'y' ]; then
     IFS="$defaultIFS"
   done
 fi
+
+[ "$os" = 'UBUNTU_DESKTOP' ] && ! command -v code >/dev/null 2>&1 && \
+read -rp 'install VS Code via umake? (y/N): ' yn
+if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
+  if ! command -v umake >/dev/null 2>&1; then
+    # see https://github.com/ubuntu/ubuntu-make#ppa
+    sudo sh -c 'add-apt-repository -y ppa:lyzardking/ubuntu-make && apt-get update && apt-get -y install ubuntu-make'
+  fi
+  # see https://github.com/ubuntu/ubuntu-make/issues/403
+  umake ide visual-studio-code --accept-license "$HOME/.local/share/umake/ide/visual-studio-code"
+fi
+
+# see https://unix.stackexchange.com/questions/1496/why-doesnt-my-bash-script-recognize-aliases
+command -v visual-studio-code >/dev/null 2>&1 && code() { visual-studio-code "$@"; }
 
 [ "$os" != 'UBUNTU_WSL' ] && command -v code >/dev/null 2>&1 && \
 read -rp 'install VS Code extensions? (y/N): ' yn

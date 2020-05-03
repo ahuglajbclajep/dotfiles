@@ -43,6 +43,7 @@ fi
 
 ## aliases ##
 command -v xdg-open >/dev/null 2>&1 && alias open='xdg-open'
+command -v visual-studio-code >/dev/null 2>&1 && alias code='visual-studio-code'
 
 ## WSL ##
 if uname -r | grep -q 'Microsoft'; then

@@ -9,6 +9,9 @@
 # see https://docs.brew.sh/Homebrew-on-Linux#install
 [ -d '/home/linuxbrew/.linuxbrew' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+# for umake
+[ -d "$HOME/.local/share/umake/bin" ] && PATH="$HOME/.local/share/umake/bin:$PATH"
+
 # mainly for Ubuntu on WSL
 if readlink --version >/dev/null 2>&1; then
   export DOTFILES_ROOT="$(readlink -f "$HOME/.zprofile" | sed 's:/[^/]*/[^/]*$::')"
