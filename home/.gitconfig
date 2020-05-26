@@ -37,8 +37,12 @@
 	# show all aliases
 	aliases = !git config --name-only --get-regexp ^alias | cut -c 7-
 
+	# show info about the latest commit
+	# advanced usages: latest origin/master
+	latest = !git --no-pager log -1 --pretty=format:'%C(yellow)%h %Cgreen%ci, %cr %C(magenta)%an%Creset%n%s%n'
+
 	# my `git log --graph --decorate --oneline`
-	# see https://git-scm.com/docs/git-log#_pretty_formats
+	# advanced usages: tree --all
 	tree = log --graph --date=short --pretty=format:'%x09%C(yellow)%h%C(cyan)%d %C(magenta)%><(7,trunc)%an %Cgreen[%cd] %Creset%s'
 
 	# my `git log --graph --decorate`
@@ -54,6 +58,7 @@
 	chmodx = update-index --chmod=+x
 
 	# amend a commit without changing its commit message
+	# advanced usages: amend -a
 	amend = commit --amend --no-edit
 
 	# create an orphan branch
