@@ -15,10 +15,13 @@
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
-  // see https://code.visualstudio.com/updates/v1_31#_fix-all-source-actions
+  // see https://code.visualstudio.com/updates/v1_31#_fix-all-source-actions,
+  // https://code.visualstudio.com/Docs/languages/javascript#_organize-imports and
+  // https://code.visualstudio.com/updates/v1_46#_add-all-missing-imports-source-action
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
-    "source.organizeImports": true
+    "source.organizeImports": true,
+    "source.addMissingImports": true
   },
 
   /* language specific */
