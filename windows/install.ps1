@@ -40,14 +40,10 @@ if ($yn -eq 'y') {
   }
 }
 
-$yn = Read-Host 'add "Open with Terminal" into right-click context menu? (y/N)'
+$yn = Read-Host 'add "Open in Windows Terminal" into right-click context menu? (y/N)'
 if ($yn -eq 'y') {
-  # see https://github.com/microsoft/terminal/issues/1060
-  $targets = @('Directory', 'Directory\Background')
-  foreach ($t in $targets) {
-    New-Item -Path "HKCU:\Software\Classes\$t\shell\MyTerminal" -Value 'Open with Terminal' -Force > $null
-    New-Item -Path "HKCU:\Software\Classes\$t\shell\MyTerminal\command" -Value "$wt -d `"%V`"" -Force > $null
-  }
+  New-Item -Path "HKCU:\Software\Classes\Directory\Background\shell\MyTerminal" -Value 'Open in Windows Terminal' -Force > $null
+  New-Item -Path "HKCU:\Software\Classes\Directory\Background\shell\MyTerminal\command" -Value "$wt -d `"%V`"" -Force > $null
 }
 
 $yn = Read-Host 'install wslgit? (y/N)'
