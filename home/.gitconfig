@@ -12,6 +12,10 @@
 [commit]
 	template = ~/.commit_template
 
+[difftool "code"]
+	# see https://code.visualstudio.com/Docs/editor/versioncontrol#_vs-code-as-git-diff-tool
+	cmd = code --wait --diff $LOCAL $REMOTE
+
 [credential]
 	# see https://git-scm.com/docs/git-credential-cache
 	helper = cache
@@ -30,6 +34,7 @@
 	current-remote-branch = rev-parse --abbrev-ref @{u}
 
 	# aliases
+	co = checkout
 	cm = commit -am
 	rh = reset --hard @
 	r1 = reset @^
@@ -45,14 +50,8 @@
 	# advanced usages: tree --all
 	tree = log --graph --date=short --pretty=format:'%x09%C(yellow)%h%C(cyan)%d %C(magenta)%><(7,trunc)%an %Cgreen[%cd] %Creset%s'
 
-	# my `git log --graph --decorate`
-	tree-v = log --graph --pretty=format:'%x09%C(yellow)%h%Creset:%C(cyan)%d%n%x09  %C(magenta)<%an> %Cgreen[%ci, %cr]%n%x09  %Creset%s%n'
-
-	# show differences character by character
-	diff-char = diff --color-words='.'
-
-	# shallow clone
-	clone1 = clone --depth 1 --shallow-submodules
+	# use VS Code as the diff tool
+	diff-v = difftool -yt code
 
 	# set the execute permission
 	chmodx = update-index --chmod=+x
@@ -70,3 +69,6 @@
 
 	# resets the index and working tree to remote state
 	pull-f = "!f() { git fetch -v && git reset --hard $(git current-remote-branch); }; f"
+
+	# shallow clone
+	clone1 = clone --depth 1 --shallow-submodules
