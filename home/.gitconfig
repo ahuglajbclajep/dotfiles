@@ -1,3 +1,5 @@
+# see https://git-scm.com/docs/git-config
+
 [user]
 	name = ahuglajbclajep
 	email = ahuglajbclajep@gmail.com
@@ -11,6 +13,9 @@
 
 [commit]
 	template = ~/.commit_template
+
+[diff]
+	renames = copies
 
 [difftool "code"]
 	# see https://code.visualstudio.com/Docs/editor/versioncontrol#_vs-code-as-git-diff-tool
@@ -34,10 +39,10 @@
 	current-remote-branch = rev-parse --abbrev-ref @{u}
 
 	# aliases
+	st = status -sb
 	co = checkout
 	cm = commit -am
 	rh = reset --hard @
-	r1 = reset @^
 
 	# show all aliases
 	aliases = !git config --name-only --get-regexp ^alias | cut -c 7-
@@ -60,15 +65,21 @@
 	# advanced usages: amend -a
 	amend = commit --amend --no-edit
 
+	# remove the latest commit without changing the working tree
+	back = reset @^
+
 	# create an orphan branch
 	orphan = "!f() { git checkout --orphan $1 && git rm -r --cached $(git root-dir); }; f"
 	gh-pages = !git orphan gh-pages
 
 	# move the latest commit to a new branch
-	move1 = "!f() { local old=$(git current-branch); git branch -m $1 && git branch $old @^; }; f"
+	movel = "!f() { local old=$(git current-branch); git branch -m $1 && git branch $old @^; }; f"
 
-	# resets the index and working tree to remote state
+	# resets the index and the working tree to remote state
 	pull-f = "!f() { git fetch -v && git reset --hard $(git current-remote-branch); }; f"
 
 	# shallow clone
-	clone1 = clone --depth 1 --shallow-submodules
+	shallow = clone --depth 1 --shallow-submodules --recurse-submodules
+
+	# convert a shallow repository to a complete one
+	unshallow = fetch --unshallow
