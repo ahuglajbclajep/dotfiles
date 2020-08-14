@@ -16,7 +16,8 @@ antigen bundle common-aliases
 antigen bundle lukechilds/zsh-nvm
 antigen bundle nvm
 antigen bundle yarn
-antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zdharma/fast-syntax-highlighting
+#antigen bundle zsh-users/zsh-syntax-highlighting
 
 # load theme
 # see https://github.com/sindresorhus/pure/tree/v1.11.0#antigen

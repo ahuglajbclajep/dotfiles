@@ -7,10 +7,12 @@ humao.rest-client
 #ms-vscode-remote.remote-wsl
 #ms-vscode.powershell
 oderwat.indent-rainbow
+pnp.polacode
 stkb.rewrap
 streetsidesoftware.code-spell-checker
 stylelint.vscode-stylelint
 timonwong.shellcheck
 tombonnike.vscode-status-bar-format-toggle
+vincaslt.highlight-matching-tag
 VisualStudioExptTeam.vscodeintellicode
 Zignd.html-css-class-completion

@@ -3,6 +3,10 @@
   /* editor */
   "workbench.startupEditor": "newUntitledFile",
   "files.defaultLanguage": "markdown",
+  // see https://github.com/microsoft/vscode/issues/38878
+  "files.exclude": {
+    "**/node_modules": true
+  },
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe",
 
   /* render */
@@ -29,15 +33,21 @@
     "editor.detectIndentation": false,
     "editor.tabSize": 2
   },
-  // powershell
   "[powershell]": {
     "editor.detectIndentation": false,
     "editor.tabSize": 2
   },
+  // ms-vscode.powershell
   "powershell.codeFormatting.autoCorrectAliases": true,
   "powershell.codeFormatting.useCorrectCasing": true,
   "powershell.codeFormatting.newLineAfterCloseBrace": false,
   "powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationAfterEveryPipeline",
+  /* typescript */
+  "typescript.tsdk": "node_modules/typescript/lib",
+
+  /* extensions */
+  "polacode.transparentBackground": true,
+  "highlight-matching-tag.highlightSelfClosing": true,
 
   /* automatically changed by extensions */
   "editor.formatOnPaste": true,
