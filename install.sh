@@ -11,7 +11,7 @@ elif uname -v | grep -q 'Ubuntu'; then
   os='UBUNTU_DESKTOP'
 else
   os='UBUNTU_WSL'
-  sed -i '/shellcheck/s/^\(# \)*/# /' Brewfile
+  sed -i '/shellcheck/s/^#*/#/' Brewfile
 fi
 
 MACOS=(
@@ -42,14 +42,14 @@ if [ "$yn" = 'y' ]; then
   brew bundle
 fi
 
+# if `false && read yn`, yn is not updated, so check if `read` was called on `[ $? -eq 0 ]`
 ! command -v zsh >/dev/null 2>&1 && command -v apt >/dev/null 2>&1 && \
 read -rp 'install zsh via apt? (y/N): ' yn
 if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
   # see https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
   sudo sh -c 'apt-get update && apt-get -y install zsh'
-  # see https://github.com/zsh-users/antigen/issues/659 and
-  # https://github.com/zsh-users/antigen/wiki/Installation
-  curl -sSL git.io/antigen > antigen.zsh
+  # see https://github.com/zsh-users/antigen/issues/659
+  curl -sSLo antigen.zsh git.io/antigen
 fi
 
 command -v zsh >/dev/null 2>&1 && \
@@ -87,6 +87,7 @@ if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
   umake ide visual-studio-code --accept-license "$HOME/.local/share/umake/ide/visual-studio-code"
 fi
 
+# for install VS Code extensions
 # see https://unix.stackexchange.com/questions/1496/why-doesnt-my-bash-script-recognize-aliases
 command -v visual-studio-code >/dev/null 2>&1 && code() { visual-studio-code "$@"; }
 
@@ -94,7 +95,7 @@ command -v visual-studio-code >/dev/null 2>&1 && code() { visual-studio-code "$@
 read -rp 'install VS Code extensions? (y/N): ' yn
 if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
   while read -r extension; do
-    if [[ "$extension" = \#* ]]; then continue; fi
+    [[ "$extension" =~ ^\# ]] && continue
     code --install-extension "$extension"
   done < vscode/_extensions.txt
 fi
@@ -102,13 +103,14 @@ fi
 [ "$os" = 'MACOS' ] && \
 read -rp 'customize Finder? (y/N): ' yn
 if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
-  # about generating .DS_Store
-  defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-
+  # about display
   defaults write com.apple.finder AppleShowAllFiles -bool true
   defaults write NSGlobalDomain AppleShowAllExtensions -bool true
   defaults write com.apple.finder ShowPathbar -bool true
+
+  # about generating .DS_Store
+  defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
   killall Finder
 fi

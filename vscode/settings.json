@@ -38,6 +38,8 @@
     "editor.tabSize": 2
   },
   // ms-vscode.powershell
+  "powershell.integratedConsole.showOnStartup": false,
+  "powershell.promptToUpdatePackageManagement": false,
   "powershell.codeFormatting.autoCorrectAliases": true,
   "powershell.codeFormatting.useCorrectCasing": true,
   "powershell.codeFormatting.newLineAfterCloseBrace": false,
