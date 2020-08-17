@@ -13,6 +13,7 @@ fi
 antigen use oh-my-zsh
 
 antigen bundle common-aliases
+antigen bundle pyenv
 antigen bundle lukechilds/zsh-nvm
 antigen bundle nvm
 antigen bundle yarn
@@ -48,8 +49,10 @@ command -v visual-studio-code >/dev/null 2>&1 && alias code='visual-studio-code'
 
 ## WSL ##
 if uname -r | grep -q 'Microsoft'; then
-  # see https://www.kwbtblog.com/entry/2019/04/27/023411
+  # see https://www.kwbtblog.com/entry/2019/04/27/023411 and
+  # http://zsh.sourceforge.net/Doc/Release/Completion-System.html
   export LS_COLORS='ow=01;33'
+  zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
   # for remote-wsl extention
   codew() { powershell.exe start code "$@"; }
