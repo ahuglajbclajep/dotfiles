@@ -48,7 +48,8 @@
   "typescript.tsdk": "node_modules/typescript/lib",
 
   /* extensions */
-  "polacode.transparentBackground": true,
+  "codesnap.showWindowControls": false,
+  "codesnap.transparentBackground": true,
   "highlight-matching-tag.highlightSelfClosing": true,
 
   /* automatically changed by extensions */
