@@ -7,9 +7,12 @@
 [core]
 	ignorecase = false
 	quotePath = false
-	autocrlf = input
 	excludesfile = ~/.gitignore_global
 	editor = code -w
+
+	# for Windows
+	autocrlf = input
+	symlinks = true
 
 [commit]
 	template = ~/.commit_template
