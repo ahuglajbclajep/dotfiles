@@ -32,24 +32,31 @@ esac
 
 printf 'run in %s mode.\n' $os
 
+# mainly for macOS
 read -rp 'install homebrew and formulae? (y/N): ' yn
 if [ "$yn" = 'y' ]; then
   if ! command -v brew >/dev/null 2>&1; then
     # see https://brew.sh/#install
-    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | /bin/bash
+    curl -sSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | /bin/bash
     [ -d '/home/linuxbrew/.linuxbrew' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   fi
   brew bundle
 fi
 
 # if `false && read yn`, yn is not updated, so check if `read` was called on `[ $? -eq 0 ]`
-! command -v zsh >/dev/null 2>&1 && command -v apt >/dev/null 2>&1 && \
-read -rp 'install zsh via apt? (y/N): ' yn
+! command -v zsh >/dev/null 2>&1 && [ ! -x "$HOME/.local/bin/zsh" ] && \
+read -rp 'install zsh and antigen via curl? (y/N): ' yn
 if [ $? -eq 0 ] && [ "$yn" = 'y' ]; then
-  # see https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
-  sudo sh -c 'apt-get update && apt-get -y install zsh'
+  mkdir -p "$HOME/.local"
+  # see https://github.com/xxh/xxh-shell-zsh/blob/40d16b1/build.sh#L26-L27
+  curl -sSL https://github.com/romkatv/zsh-bin/releases/download/v4.1.0/zsh-5.8-linux-x86_64.tar.gz |\
+    tar -xzC "$HOME/.local"
+  # for add-zsh-hook, is-at-least and compinit
+  # see https://github.com/romkatv/zsh-bin/blob/v4.1.0/install#L478
+  "$HOME/.local/share/zsh/5.8/scripts/relocate"
+
   # see https://github.com/zsh-users/antigen/issues/659
-  curl -sSLo antigen.zsh git.io/antigen
+  [ ! -f 'antigen.zsh' ] && curl -sSLo 'antigen.zsh' git.io/antigen
 fi
 
 command -v zsh >/dev/null 2>&1 && \

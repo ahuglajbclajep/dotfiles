@@ -35,9 +35,7 @@ export EDITOR=code
 
 ## *env ##
 # if ~/.nvm/* exists from the beginning, `antigen bundle lukechilds/zsh-nvm` fails due to `git clone`
-if [ ! -f "$NVM_DIR/default-packages" ]; then
-  echo 'yarn' > "$NVM_DIR/default-packages"
-fi
+[ ! -f "$NVM_DIR/default-packages" ] && echo 'yarn' > "$NVM_DIR/default-packages"
 
 ## others ##
 # for Homebrew on Linux
@@ -53,6 +51,9 @@ if uname -r | grep -q 'Microsoft'; then
   # http://zsh.sourceforge.net/Doc/Release/Completion-System.html
   export LS_COLORS='ow=01;33'
   zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+  # for `screen` command
+  export SCREENDIR="$HOME/.screen"
 
   # for remote-wsl extention
   codew() { powershell.exe start code "$@"; }
