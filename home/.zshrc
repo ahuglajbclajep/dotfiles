@@ -37,6 +37,9 @@ export EDITOR=code
 # if ~/.nvm/* exists from the beginning, `antigen bundle lukechilds/zsh-nvm` fails due to `git clone`
 [ ! -f "$NVM_DIR/default-packages" ] && echo 'yarn' > "$NVM_DIR/default-packages"
 
+# see https://pipenv.pypa.io/en/latest/advanced/#pipenv.environments.PIPENV_VENV_IN_PROJECT
+export PIPENV_VENV_IN_PROJECT=1
+
 ## others ##
 # for Homebrew on Linux
 [ "$(uname)" != 'Darwin' ] && umask 002

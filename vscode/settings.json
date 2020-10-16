@@ -37,6 +37,10 @@
   },
 
   /* language specific */
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false,
+    "editor.quickSuggestions": true
+  },
   "[dockerfile]": {
     "editor.detectIndentation": false,
     "editor.tabSize": 2
