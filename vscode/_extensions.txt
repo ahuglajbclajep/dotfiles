@@ -1,4 +1,5 @@
 adpyke.codesnap
+bierner.comment-tagged-templates
 bierner.markdown-checkbox
 CoenraadS.bracket-pair-colorizer-2
 dbaeumer.vscode-eslint
@@ -19,4 +20,6 @@ timonwong.shellcheck
 tombonnike.vscode-status-bar-format-toggle
 vincaslt.highlight-matching-tag
 VisualStudioExptTeam.vscodeintellicode
+wix.vscode-import-cost
+wraith13.bracket-lens
 Zignd.html-css-class-completion
