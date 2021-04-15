@@ -15,8 +15,7 @@
   "editor.rulers": [80, 120],
 
   /* completion */
-  // see https://github.com/microsoft/vscode/issues/85707
-  "editor.renameOnType": true,
+  "editor.linkedEditing": true,
   // see https://code.visualstudio.com/docs/editor/emmet
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
@@ -25,6 +24,7 @@
 
   /* format */
   "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.eol": "\n",
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
@@ -49,19 +49,18 @@
     "editor.detectIndentation": false,
     "editor.tabSize": 2
   },
-  // ms-vscode.powershell
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.promptToUpdatePackageManagement": false,
   "powershell.codeFormatting.autoCorrectAliases": true,
   "powershell.codeFormatting.useCorrectCasing": true,
   "powershell.codeFormatting.newLineAfterCloseBrace": false,
   "powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationAfterEveryPipeline",
-  /* typescript */
   "typescript.tsdk": "node_modules/typescript/lib",
 
   /* extensions */
   "codesnap.showWindowControls": false,
   "codesnap.transparentBackground": true,
+  "auto-close-tag.SublimeText3Mode": true,
   "highlight-matching-tag.highlightSelfClosing": true,
 
   /* automatically changed by extensions */
